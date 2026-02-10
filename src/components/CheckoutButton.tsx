@@ -13,8 +13,6 @@ export default function CheckoutButton() {
         quantity: 1,
       },
     ]);
-
-    // dfvjkb dfkjb
     window.location.href = updatedCart.checkoutUrl;
   };
 
