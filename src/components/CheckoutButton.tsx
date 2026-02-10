@@ -16,5 +16,6 @@ export default function CheckoutButton() {
     window.location.href = updatedCart.checkoutUrl;
   };
 
+  //
   return <button onClick={handleCheckout}>Checkout</button>;
 }
