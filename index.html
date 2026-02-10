@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rolex Official Jeweler - Store Hours</title>
+
+    <style>
+      :root {
+        --ink: #0b2f3a;
+        --muted: #6a7b84;
+        --line: rgba(10, 31, 39, 0.1);
+        --bg: #ffffff;
+        --shadow: 0 18px 50px rgba(10, 31, 39, 0.1);
+        --shadow2: 0 10px 28px rgba(10, 31, 39, 0.1);
+        --radius: 18px;
+
+        --green: #0b6b3a;
+        --greenSoft: rgba(11, 107, 58, 0.1);
+        --red: #9b2c2c;
+        --redSoft: rgba(155, 44, 44, 0.12);
+
+        --container: 1200px;
+        --panelW: 420px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial;
+        color: var(--ink);
+        background: #fbfbfb;
+      }
+
+      .wrap {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 56px 18px 70px;
+      }
+
+      .heroTitle {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .heroTitle h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        font-size: clamp(28px, 3vw, 44px);
+        line-height: 1.15;
+        color: var(--ink);
+      }
+      .heroTitle p {
+        margin: 10px 0 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(15px, 1.5vw, 20px);
+        color: var(--ink);
+        letter-spacing: 0.04em;
+      }
+
+      /* Section container (needed for overlay panel positioning) */
+      .section {
+        position: relative;
+        background: var(--bg);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 34px 0;
+        overflow: hidden;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.9fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      /* LEFT: one big image */
+      .media {
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        background: #f2f2f2;
+        min-height: 460px;
+        position: relative;
+      }
+      .media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform: scale(1.01);
+      }
+
+      /* RIGHT: widget */
+      .widget {
+        border-radius: var(--radius);
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow2);
+        padding: 18px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .widgetTop {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 12px;
+      }
+
+      .clockWrap {
+        width: 88px;
+        height: 88px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        background: radial-gradient(
+          circle at 30% 30%,
+          #ffffff 0,
+          #f6f6f6 40%,
+          #f0f0f0 100%
+        );
+        flex: 0 0 auto;
+      }
+
+      .brandStamp {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        align-items: flex-end;
+        text-align: right;
+        min-width: 120px;
+      }
+      .brandStamp .mini {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .brandStamp .name {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        letter-spacing: 0.06em;
+        color: var(--ink);
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .rows {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        padding: 8px 8px;
+        border-radius: 12px;
+      }
+      .row .label {
+        font-size: 13px;
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .row .value {
+        font-size: 13px;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .row.muted .label,
+      .row.muted .value {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .statusBar {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 12px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+        user-select: none;
+        background: #fff;
+        transition: background 0.2s ease;
+      }
+      .statusBar:hover {
+        background: #fafafa;
+      }
+
+      .statusPill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--green);
+        box-shadow: 0 0 0 6px var(--greenSoft);
+      }
+      .dot.closed {
+        background: var(--red);
+        box-shadow: 0 0 0 6px var(--redSoft);
+      }
+
+      .chev {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        color: var(--ink);
+        background: #fff;
+        transition: transform 0.2s ease;
+      }
+
+      /* --------- SLIDE PANEL --------- */
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 31, 39, 0.1);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 5;
+      }
+      .overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .panel {
+        position: absolute;
+        top: 26px;
+        right: 26px;
+        width: min(var(--panelW), calc(100% - 52px));
+        height: calc(100% - 52px);
+        background: #fff;
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        transform: translateX(110%);
+        transition: transform 0.28s ease;
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+      }
+      .panel.open {
+        transform: translateX(0);
+      }
+
+      .panelHeader {
+        padding: 14px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-bottom: 1px solid var(--line);
+      }
+      .closeBtn {
+        border: 0;
+        background: transparent;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        color: var(--ink);
+        padding: 6px 10px;
+        border-radius: 12px;
+      }
+      .closeBtn:hover {
+        background: rgba(10, 31, 39, 0.06);
+      }
+
+      .hours {
+        padding: 18px 22px 22px;
+        overflow: auto;
+      }
+
+      .hoursRow {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 18px;
+        padding: 10px 0;
+        font-size: 13px;
+        align-items: center;
+      }
+      .dow {
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .hoursVal {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .today .dow,
+      .today .hoursVal {
+        color: var(--green);
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .media {
+          min-height: 360px;
+        }
+        .panel {
+          top: 16px;
+          right: 16px;
+          height: calc(100% - 32px);
+          width: min(520px, calc(100% - 32px));
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="heroTitle">
+        <h1>A Legacy of Fine Jewelry & Luxury Watches</h1>
+        <p>Since 1976 | Houston & Austin, TX</p>
+      </div>
+
+      <div class="section" id="section">
+        <div class="grid">
+          <!-- LEFT: Store image -->
+          <div class="media" aria-label="Store imagery">
+            <img
+              alt="Rolex store interior"
+              src="https://media.rolex.com/image/upload/d_retailers:a_generic:pos-banner.jpg/q_auto/f_auto/v1/retailers/RSWI_170921/POS-banner.jpg"
+            />
+          </div>
+
+          <!-- RIGHT: Time widget -->
+          <aside class="widget" aria-label="Store time and hours">
+            <div class="widgetTop">
+              <div class="clockWrap" aria-label="Analog clock">
+                <svg
+                  width="70"
+                  height="70"
+                  viewBox="0 0 100 100"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <radialGradient id="g" cx="35%" cy="30%" r="70%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="70%" stop-color="#f3f3f3" />
+                      <stop offset="100%" stop-color="#ededed" />
+                    </radialGradient>
+                  </defs>
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="46"
+                    fill="url(#g)"
+                    stroke="rgba(10,31,39,.14)"
+                    stroke-width="2"
+                  />
+                  <g
+                    stroke="rgba(10,31,39,.25)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <line x1="50" y1="10" x2="50" y2="16" />
+                    <line x1="50" y1="84" x2="50" y2="90" />
+                    <line x1="10" y1="50" x2="16" y2="50" />
+                    <line x1="84" y1="50" x2="90" y2="50" />
+                  </g>
+
+                  <line
+                    id="hHand"
+                    x1="50"
+                    y1="50"
+                    x2="50"
+                    y2="30"
+                    stroke="#0b2f3a"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                  />
+                  <line
+                    id="mHand"
+                    x1="50"
+                    y1="50"
+                    x2="50"
+                    y2="22"
+                    stroke="#0b2f3a"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  />
+                  <line
+                    id="sHand"
+                    x1="50"
+                    y1="53"
+                    x2="50"
+                    y2="18"
+                    stroke="rgba(10,31,39,.45)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="50" cy="50" r="3.2" fill="#0b2f3a" />
+                </svg>
+              </div>
+
+              <div class="brandStamp">
+                <div class="mini">Official Jeweler</div>
+                <div class="name">Rolex</div>
+              </div>
+            </div>
+
+            <div class="rows">
+              <div class="row">
+                <div class="label">Your time</div>
+                <div class="value" id="yourTime">--:--</div>
+              </div>
+
+              <div class="row muted">
+                <div class="label" id="countryLabel">United States</div>
+                <div class="value" id="storeTimeLabel">Austin</div>
+              </div>
+
+              <div class="row">
+                <div class="label" id="storeCity">Austin</div>
+                <div class="value" id="storeTime">--:--</div>
+              </div>
+            </div>
+
+            <!-- Status bar - click to open hours panel -->
+            <div
+              class="statusBar"
+              id="openPanel"
+              role="button"
+              tabindex="0"
+              aria-expanded="false"
+            >
+              <div class="statusPill">
+                <span class="dot" id="statusDot"></span>
+                <span id="statusText">Checking hours…</span>
+              </div>
+              <div class="chev" id="chev" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 6l6 6-6 6"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Overlay + Hours Panel -->
+        <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+        <div
+          class="panel"
+          id="panel"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Opening hours"
+        >
+          <div class="panelHeader">
+            <button class="closeBtn" id="closePanel" aria-label="Close">
+              ×
+            </button>
+          </div>
+          <div class="hours" id="hoursList"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ---------- CONFIGURATION ----------
+      const STORE = {
+        countryLabel: "United States",
+        city: "Austin",
+        tz: "America/Chicago", // Austin timezone
+        hours: {
+          mon: { open: "10:00", close: "18:00" },
+          tue: { open: "10:00", close: "18:00" },
+          wed: { open: "10:00", close: "18:00" },
+          thu: { open: "10:00", close: "18:00" },
+          fri: { open: "10:00", close: "19:00" },
+          sat: { open: "10:00", close: "19:00" },
+          sun: { open: "12:00", close: "18:00" },
+        },
+      };
+
+      // ---------- HELPER FUNCTIONS ----------
+      const $ = (id) => document.getElementById(id);
+      const pad = (n) => String(n).padStart(2, "0");
+
+      function formatTime12(date, timeZone) {
+        return new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+          timeZone,
+        })
+          .format(date)
+          .toLowerCase();
+      }
+
+      function getParts(date, timeZone) {
+        const parts = new Intl.DateTimeFormat("en-US", {
+          timeZone,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+          weekday: "short",
+        }).formatToParts(date);
+
+        const map = {};
+        for (const p of parts) map[p.type] = p.value;
+        return {
+          hh: +map.hour,
+          mm: +map.minute,
+          ss: +map.second,
+          weekdayShort: map.weekday,
+        };
+      }
+
+      function dayKeyFromShort(weekdayShort) {
+        const w = weekdayShort.toLowerCase();
+        if (w.startsWith("mon")) return "mon";
+        if (w.startsWith("tue")) return "tue";
+        if (w.startsWith("wed")) return "wed";
+        if (w.startsWith("thu")) return "thu";
+        if (w.startsWith("fri")) return "fri";
+        if (w.startsWith("sat")) return "sat";
+        return "sun";
+      }
+
+      function toMinutes(hhmm) {
+        const [h, m] = hhmm.split(":").map(Number);
+        return h * 60 + m;
+      }
+
+      function isOpenNow(parts, hoursForDay) {
+        if (!hoursForDay) return false;
+        const nowMin = parts.hh * 60 + parts.mm;
+        const openMin = toMinutes(hoursForDay.open);
+        const closeMin = toMinutes(hoursForDay.close);
+        return nowMin >= openMin && nowMin < closeMin;
+      }
+
+      function to12(hhmm) {
+        const [hStr, mStr] = hhmm.split(":");
+        let h = +hStr,
+          m = +mStr;
+        const ampm = h >= 12 ? "pm" : "am";
+        h = h % 12;
+        if (h === 0) h = 12;
+        return `${h}:${pad(m)}${ampm}`;
+      }
+
+      function hoursText(h) {
+        if (!h) return "Closed";
+        return `${to12(h.open)} — ${to12(h.close)}`;
+      }
+
+      function updateAnalog(parts) {
+        const s = parts.ss;
+        const m = parts.mm + s / 60;
+        const h = (parts.hh % 12) + m / 60;
+
+        const sDeg = s * 6;
+        const mDeg = m * 6;
+        const hDeg = h * 30;
+
+        $("sHand").setAttribute("transform", `rotate(${sDeg} 50 50)`);
+        $("mHand").setAttribute("transform", `rotate(${mDeg} 50 50)`);
+        $("hHand").setAttribute("transform", `rotate(${hDeg} 50 50)`);
+      }
+
+      function renderHours(parts) {
+        const todayKey = dayKeyFromShort(parts.weekdayShort);
+
+        const order = [
+          ["mon", "Mon"],
+          ["tue", "Tue"],
+          ["wed", "Wed"],
+          ["thu", "Thu"],
+          ["fri", "Fri"],
+          ["sat", "Sat"],
+          ["sun", "Sun"],
+        ];
+
+        $("hoursList").innerHTML = order
+          .map(([key, label]) => {
+            const h = STORE.hours[key] || null;
+            const isToday = key === todayKey;
+            return `
+          <div class="hoursRow ${isToday ? "today" : ""}">
+            <div class="dow">${label}</div>
+            <div class="hoursVal">${hoursText(h)}</div>
+          </div>
+        `;
+          })
+          .join("");
+
+        const open = isOpenNow(parts, STORE.hours[todayKey] || null);
+        $("statusDot").classList.toggle("closed", !open);
+        $("statusText").textContent = open ? "Open now" : "Closed now";
+      }
+
+      // ---------- PANEL CONTROLS ----------
+      function openPanel() {
+        $("panel").classList.add("open");
+        $("overlay").classList.add("open");
+        $("openPanel").setAttribute("aria-expanded", "true");
+        $("chev").style.transform = "rotate(90deg)";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closePanel() {
+        $("panel").classList.remove("open");
+        $("overlay").classList.remove("open");
+        $("openPanel").setAttribute("aria-expanded", "false");
+        $("chev").style.transform = "rotate(0deg)";
+        document.body.style.overflow = "";
+      }
+
+      $("openPanel").addEventListener("click", openPanel);
+      $("openPanel").addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openPanel();
+        }
+      });
+
+      $("closePanel").addEventListener("click", closePanel);
+      $("overlay").addEventListener("click", closePanel);
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePanel();
+      });
+
+      // ---------- MAIN CLOCK UPDATE ----------
+      function tick() {
+        const now = new Date();
+
+        // User's local time
+        const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        $("yourTime").textContent = formatTime12(now, localTz);
+
+        // Store time (Austin)
+        const storeParts = getParts(now, STORE.tz);
+        $("storeTime").textContent = formatTime12(now, STORE.tz);
+
+        $("countryLabel").textContent = STORE.countryLabel;
+        $("storeTimeLabel").textContent = STORE.city;
+        $("storeCity").textContent = STORE.city;
+
+        updateAnalog(storeParts);
+        renderHours(storeParts);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>
