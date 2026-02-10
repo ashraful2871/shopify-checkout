@@ -14,6 +14,7 @@ export default function CheckoutButton() {
       },
     ]);
 
+    //
     window.location.href = updatedCart.checkoutUrl;
   };
 
