@@ -11,8 +11,6 @@ export async function createCart() {
       }
     }
   `;
-  //  console.log("Creating cart with query:", query);
-  //  console.log("Creating cart with query:", query);
 
   const res = await fetch(
     `https://${process.env.SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`,
