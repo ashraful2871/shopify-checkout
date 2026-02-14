@@ -681,7 +681,6 @@
         const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         $("yourTime").textContent = formatTime12(now, localTz);
 
-        // Store time (Austin)
         const storeParts = getParts(now, STORE.tz);
         $("storeTime").textContent = formatTime12(now, STORE.tz);
 
