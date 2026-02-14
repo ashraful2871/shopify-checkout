@@ -677,7 +677,6 @@
       function tick() {
         const now = new Date();
 
-        // User's local time
         const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         $("yourTime").textContent = formatTime12(now, localTz);
 
