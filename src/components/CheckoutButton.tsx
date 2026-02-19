@@ -17,5 +17,6 @@ export default function CheckoutButton() {
   };
 
   //
+  //// TODO: Add error handling and loading state
   return <button onClick={handleCheckout}>Checkout</button>;
 }
