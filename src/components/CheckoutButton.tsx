@@ -13,6 +13,7 @@ export default function CheckoutButton() {
         quantity: 1,
       },
     ]);
+    //@ts-check
 
     window.location.href = updatedCart.checkoutUrl;
   };
